@@ -18,8 +18,7 @@ const mockCheckoutRepository = {
 };
 class MockPaymentGateway implements PaymentGateway {
   execute = jest.fn().mockImplementation(() => {
-    
-    const isSuccess = Math.random() > 0.5; 
+    const isSuccess = true; 
     return Promise.resolve(isSuccess); 
   });
 }
