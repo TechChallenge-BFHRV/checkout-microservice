@@ -21,7 +21,7 @@ jobs:
           id: build-docker-image
           run: |
             ls -la 
-            docker build . -f Dockerfile -t rbatista1306/techchallenge-checkout-microservice:main
+            docker build . -f Dockerfile -t viniciusdeliz/techchallenge-checkout-microservice:main
         - name: push the docker image
           id: push-docker-image
           run: docker push ${{secrets.DOCKERHUB_USERNAME}}/techchallenge-checkout-microservice:main
