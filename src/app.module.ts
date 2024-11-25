@@ -6,6 +6,7 @@ import { CreateCheckoutUseCase } from './usecases/checkout.usecase';
 import { CheckoutRepository } from './repositories/checkout.repository';
 import { Checkout, CheckoutSchema } from './schemas/checkout.schema';
 import { IntegrationModule } from './service/integration.module';
+import { ProcessCheckoutUseCase } from './usecases/process-checkout.usecase';
 
 @Module({
   imports: [
@@ -23,7 +24,11 @@ import { IntegrationModule } from './service/integration.module';
     IntegrationModule,
   ],
   controllers: [CheckoutController],
-  providers: [CreateCheckoutUseCase, CheckoutRepository], // Registra o repositório
+  providers: [
+    CreateCheckoutUseCase,
+    ProcessCheckoutUseCase,
+    CheckoutRepository
+  ],
   exports: [CheckoutRepository], // Exporta se necessário
 })
 export class AppModule {}

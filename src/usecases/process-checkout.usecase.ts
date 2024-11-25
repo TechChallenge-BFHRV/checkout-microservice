@@ -4,19 +4,18 @@ import { CheckoutStatus } from '../schemas/checkout.schema';
 import { PaymentGateway } from '../adapters/interfaces/payment-gateway';
 
 @Injectable()
-export class CreateCheckoutUseCase {
+export class ProcessCheckoutUseCase {
     constructor(
         private readonly checkoutRepository: CheckoutRepository,
         @Inject(PaymentGateway) private readonly paymentGateway: PaymentGateway,
     ) {}
 
-    async execute(orderId: number, customerId: number) {
-        // Cria o checkout com status PENDING
-        const checkout = await this.checkoutRepository.create({
-            orderId,
-            customerId,
-            status: CheckoutStatus.PENDING,
-        });
-        return checkout;
+    async execute(checkoutId: string, totalPrice: number) {
+        const paymentSucceed = await this.paymentGateway.execute(totalPrice);
+        const updatedCheckout = await this.checkoutRepository.updateStatus(
+            checkoutId,
+            paymentSucceed ? CheckoutStatus.APPROVED : CheckoutStatus.REJECTED,
+        );
+        return updatedCheckout;
     }
 }

@@ -2,7 +2,6 @@ import { forwardRef, Module } from '@nestjs/common';
 import { FakePaymentGatewayAdapter } from './fake-payment-gateway';
 import { PaymentGateway } from '../adapters/interfaces/payment-gateway';
 import { AppModule } from '../app.module';
-import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [forwardRef(() => AppModule)],
@@ -12,6 +11,11 @@ import { HttpModule } from '@nestjs/axios';
       useClass: FakePaymentGatewayAdapter,
     },
   ],
-  exports: [PaymentGateway], // Exporta o token diretamente
+  exports: [
+    {
+      provide: PaymentGateway,
+      useClass: FakePaymentGatewayAdapter,
+    },
+  ],
 })
 export class IntegrationModule {}
