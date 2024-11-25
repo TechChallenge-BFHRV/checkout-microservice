@@ -3,6 +3,14 @@ import { CreateCheckoutUseCase } from '../checkout.usecase';
 import { CheckoutRepository } from '../../repositories/checkout.repository';
 import { PaymentGateway } from '../../adapters/interfaces/payment-gateway';
 import { CheckoutStatus } from '../../schemas/checkout.schema';
+import { ProcessCheckoutUseCase } from '../process-checkout.usecase';
+
+const sampleCheckout = {
+  id: '1',
+  orderId: 123,
+  customerId: 456,
+  status: CheckoutStatus.PENDING,
+};
 
 const mockCheckoutRepository = {
   create: jest.fn().mockResolvedValue({
@@ -33,6 +41,7 @@ describe('CreateCheckoutUseCase', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         CreateCheckoutUseCase,
+        ProcessCheckoutUseCase,
         { provide: CheckoutRepository, useValue: mockCheckoutRepository },
         { provide: PaymentGateway, useValue: mockPaymentGateway },
       ],
@@ -41,8 +50,7 @@ describe('CreateCheckoutUseCase', () => {
     createCheckoutUseCase = module.get<CreateCheckoutUseCase>(CreateCheckoutUseCase);
   });
 
-  it('should create a checkout and handle payment approval or rejection', async () => {
-  
+  it('should create a checkout', async () => {
     mockCheckoutRepository.create.mockResolvedValueOnce({
       id: '1',
       orderId: 123,
@@ -51,15 +59,6 @@ describe('CreateCheckoutUseCase', () => {
     });
 
     const result = await createCheckoutUseCase.execute(123, 456);
-
-    
-    if (result.status === CheckoutStatus.APPROVED) {
-      expect(mockCheckoutRepository.updateStatus).toHaveBeenCalledWith('1', CheckoutStatus.APPROVED);
-    } else {
-      expect(mockCheckoutRepository.updateStatus).toHaveBeenCalledWith('1', CheckoutStatus.REJECTED);
-    }
-
-    
-    expect([CheckoutStatus.APPROVED, CheckoutStatus.REJECTED]).toContain(result.status);
+    expect(result.status).toContain(CheckoutStatus.PENDING);
   });
 });
