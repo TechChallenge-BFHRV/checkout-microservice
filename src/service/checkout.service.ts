@@ -6,7 +6,7 @@ import { CreateCheckoutDTO } from '../pkg/dtos/create-checkout-dto';
 
 @Injectable()
 export class CheckoutService {
-  constructor(@InjectModel(Checkout.name) private checkoutModel: Model<Checkout>) {}
+  constructor(@InjectModel(Checkout.name) private readonly checkoutModel: Model<Checkout>) {}
 
   async create(createCheckoutDTO: CreateCheckoutDTO): Promise<Checkout> {
     // Criando um novo Checkout com os dados do DTO

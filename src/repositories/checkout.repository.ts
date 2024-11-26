@@ -6,7 +6,7 @@ import { Checkout, CheckoutStatus } from '../schemas/checkout.schema';
 @Injectable()
 export class CheckoutRepository {
   constructor(
-    @InjectModel(Checkout.name) private checkoutModel: Model<Checkout>,
+    @InjectModel(Checkout.name) private readonly checkoutModel: Model<Checkout>,
   ) {}
 
   async create(data: Partial<Checkout>): Promise<Checkout> {

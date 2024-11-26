@@ -2,7 +2,9 @@ import { PaymentGateway } from '../adapters/interfaces/payment-gateway';
 
 export class FakePaymentGatewayAdapter implements PaymentGateway {
   async execute(amount: number): Promise<boolean> {
-    if (amount < 0) false;
+    if (amount < 0) {
+      return false;
+    }
 
     return new Promise((resolve) => {
       setTimeout(() => {
