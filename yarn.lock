@@ -3373,6 +3373,16 @@ jest-config@^29.7.0:
     slash "^3.0.0"
     strip-json-comments "^3.1.1"
 
+jest-cucumber@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/jest-cucumber/-/jest-cucumber-4.5.0.tgz#bffa172cfa40b15a81cce4f04326e198beffa7ee"
+  integrity sha512-EGVqkeE6xM/wnpWuLuB3AMQs4vNkLDwOuH3bsH2AigphAqDp+k3E+AIh0FAKhJ/1IjLTfZKyupIPRlYN62YZ+A==
+  dependencies:
+    "@cucumber/gherkin" "^28.0.0"
+    callsites "^3.0.0"
+    glob "^10.3.10"
+    uuid "^10.0.0"
+
 jest-diff@^29.7.0:
   version "29.7.0"
   resolved "https://registry.yarnpkg.com/jest-diff/-/jest-diff-29.7.0.tgz#017934a66ebb7ecf6f205e84699be10afd70458a"
@@ -5396,6 +5406,11 @@ uuid@9.0.1:
   version "9.0.1"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-9.0.1.tgz#e188d4c8853cc722220392c424cd637f32293f30"
   integrity sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==
+
+uuid@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-10.0.0.tgz#5a95aa454e6e002725c79055fd42aaba30ca6294"
+  integrity sha512-8XkAphELsDnEGrDxUOHB3RGvXz6TeuYSGEZBOjtTtPm2lwhGBjLgOzLHB63IUWfBpNucQjND6d3AOudO+H3RWQ==
 
 v8-compile-cache-lib@^3.0.1:
   version "3.0.1"
