@@ -31,7 +31,6 @@ class MockPaymentGateway implements PaymentGateway {
 }
 
 defineFeature(feature, test => {
-  let controller: CheckoutController;
   let createCheckoutUseCase: CreateCheckoutUseCase;
   let processCheckoutUseCase: ProcessCheckoutUseCase;
 
@@ -51,7 +50,6 @@ defineFeature(feature, test => {
         }
       ]
     }).compile();
-    controller = module.get<CheckoutController>(CheckoutController);
     createCheckoutUseCase = module.get<CreateCheckoutUseCase>(CreateCheckoutUseCase);
     processCheckoutUseCase = module.get<ProcessCheckoutUseCase>(ProcessCheckoutUseCase);
     });
@@ -86,7 +84,6 @@ defineFeature(feature, test => {
 
         when('the user provides payment details and the payment gateway confirms the transaction', async () => {
           executeProcessCheckoutUseCase = await processCheckoutUseCase.execute(executeUseCase._id, sampleOrder.finalPrice);
-          console.log('execute process:', executeProcessCheckoutUseCase);
         });
 
         then('the microservice should return a success response with status “Approved”', () => {

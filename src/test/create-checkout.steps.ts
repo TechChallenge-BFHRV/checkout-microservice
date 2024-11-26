@@ -31,7 +31,6 @@ class MockPaymentGateway implements PaymentGateway {
 }
 
 defineFeature(feature, test => {
-  let controller: CheckoutController;
   let createCheckoutUseCase: CreateCheckoutUseCase;
 
   beforeEach(async () => {
@@ -50,7 +49,6 @@ defineFeature(feature, test => {
         }
       ]
     }).compile();
-    controller = module.get<CheckoutController>(CheckoutController);
     createCheckoutUseCase = module.get<CreateCheckoutUseCase>(CreateCheckoutUseCase);
     });
 
