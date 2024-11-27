@@ -4,7 +4,7 @@ WORKDIR /usr/src/techchallenge-app/checkout-microservice
 
 COPY package*.json ./
 
-RUN yarn install
+RUN yarn install --ignore-scripts
 
 COPY src ./src
 
@@ -26,7 +26,7 @@ WORKDIR /usr/src/techchallenge-app/checkout-microservice
 
 COPY package*.json ./
 
-RUN yarn install --production
+RUN yarn install --production --ignore-scripts
 
 COPY --from=development /usr/src/techchallenge-app/checkout-microservice/dist ./dist
 
