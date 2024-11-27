@@ -1,4 +1,5 @@
 import { PaymentGateway } from '../adapters/interfaces/payment-gateway';
+import { getRandomValues } from 'crypto';
 
 export class FakePaymentGatewayAdapter implements PaymentGateway {
   async execute(amount: number): Promise<boolean> {
@@ -7,8 +8,12 @@ export class FakePaymentGatewayAdapter implements PaymentGateway {
     }
 
     return new Promise((resolve) => {
+      const arr = new Uint32Array(1);
+      getRandomValues(arr);
+      const randomValue = arr[0] / (0xFFFFFFFF + 1);
+
       setTimeout(() => {
-        resolve(Math.random() > 0.33);
+        resolve(randomValue > 0.33);
       }, 1000);
     });
   }
