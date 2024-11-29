@@ -2,9 +2,11 @@ name: Trigger Deployment
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows:
+      - Build and Push Docker Image
+    types:
+      - completed
 
 jobs:
   trigger:
